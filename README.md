@@ -1,57 +1,61 @@
-# Video Streaming with AWS S3 and CloudFront
 
-This project demonstrates how to set up video streaming using Amazon S3 for storage and AWS CloudFront for efficient content delivery. In this example, we use a sample video from the Kannada movie "KGF 2" stored in an S3 bucket, and CloudFront is configured to deliver the content globally with low latency.
 
-## Table of Contents
+# Secure Video Streaming with AWS S3 and CloudFront
 
-- [Prerequisites](#prerequisites)
-- [Overview](#overview)
-- [Setup Instructions](#setup-instructions)
-  - [1. Create an S3 Bucket](#1-create-an-s3-bucket)
-  - [2. Create a CloudFront Distribution](#2-create-a-cloudfront-distribution)
-  - [3. Update S3 Bucket Policy](#3-update-s3-bucket-policy)
-  - [4. Access the Video in Browser](#4-access-the-video-in-browser)
-- [Contributors](#contributors)
-- [License](#license)
+This repository contains the necessary configurations to set up a secure video streaming solution using AWS S3 and CloudFront.
 
-## Prerequisites
+## AWS Configuration:
 
-- [AWS Account](https://aws.amazon.com/)
-- [AWS CLI](https://aws.amazon.com/cli/) (optional, for command-line setup)
+**Create an S3 Bucket:**
+1. Log in to the AWS Management Console.
+2. Navigate to the S3 service.
+3. Click on "Create Bucket."
+4. Provide a unique bucket name and choose a region.
+5. Configure other settings as needed and create the bucket.
 
-## Overview
+**Upload the Sample Video File:**
+1. Open the newly created S3 bucket.
+2. Click on "Upload" and select the "KGF2_scene.mp4" file.
+3. Configure permissions if required.
 
-Amazon S3 is used to store the video file, and AWS CloudFront is employed as a content delivery network (CDN) to distribute the video efficiently. The S3 bucket is configured to allow CloudFront to access the stored objects, ensuring secure and fast content delivery.
+## CloudFront Setup:
 
-## Setup Instructions
+**Create a CloudFront Distribution:**
+1. Navigate to the CloudFront service in the AWS Management Console.
+2. Click on "Create Distribution."
+3. Choose "Web" distribution.
+4. Set the S3 bucket as the origin.
+5. Configure other settings according to your requirements.
 
-### 1. Create an S3 Bucket
+**Configure Basic Settings and Security Options:**
+1. Set the appropriate alternate domain name (CNAME) and other settings.
+2. Choose your preferred security policies (HTTP to HTTPS redirect, etc.).
 
-- Define a unique name for your S3 bucket.
-- Use the AWS Management Console or AWS CLI to create the bucket.
-- Upload your sample video file (e.g., from the movie "KGF 2") to the S3 bucket.
+**Modify Bucket Policy for CloudFront Access:**
+1. Update the S3 bucket policy to grant access to the CloudFront distribution.
+   An example bucket policy is provided in the documentation.
+   {
+  "Version": "2012-10-17",
+  "Id": "PolicyForCloudFront",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity YOUR_CLOUDFRONT_ORIGIN_ACCESS_IDENTITY"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-s3-bucket-name/*"
+    }
+  ]
+}
 
-### 2. Create a CloudFront Distribution
 
-- Navigate to the [AWS CloudFront console](https://console.aws.amazon.com/cloudfront/).
-- Create a new distribution with your S3 bucket as the origin.
-- Configure the distribution settings, such as the default cache behavior, origin settings, and other options.
+## Access the Video:
 
-### 3. Update S3 Bucket Policy
+1. Open Your Browser.
+2. Enter the CloudFront Distribution URL with Access Credentials, for example, `https://your-cloudfront-domain.com/KGF2_scene.mp4`.
+3. Enjoy watching the securely delivered sample video.
 
-- Modify the bucket policy to allow CloudFront to access objects. Use a policy similar to the following:
 
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Principal": {
-          "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity YOUR-CLOUDFRONT-DISTRIBUTION-ID"
-        },
-        "Action": "s3:GetObject",
-        "Resource": "arn:aws:s3:::your-s3-bucket-name/*"
-      }
-    ]
-  }
+
+---
