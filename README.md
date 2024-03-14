@@ -1,42 +1,36 @@
-# Secure Video Streaming with AWS S3 and CloudFront
+# Project Name:  Video Hosting with AWS S3 and CloudFront
 
-This repository contains configures for a secure video streaming solution using AWS S3 and CloudFront.
+## Overview:
+This project demonstrates the setup and configuration of Amazon S3 (Simple Storage Service) and CloudFront to host and deliver a sample video clip from the popular Kannada movie "KGF 2". By leveraging these AWS services together, we ensure efficient and secure delivery of video content while enhancing performance and user experience.
 
-## AWS Configuration:
+## Requirements:
+- An AWS account
+- Basic familiarity with AWS services (S3, CloudFront)
+- Sample video file (e.g., a clip from "KGF 2")
 
-### Create an S3 Bucket:
-1. Log in to the AWS Management Console.
-2. Navigate to the S3 service.
-3. Click on "Create Bucket."
-4. Provide a unique bucket name and choose a region.
-5. Configure other settings as needed and create the bucket.
+## Steps:
+1. **Create an S3 Bucket:**
+   - Create a new S3 bucket to store the sample video file.
 
-### Upload the Sample Video File:
-1. Open the newly created S3 bucket.
-2. Click on "Upload" and select the "KGF2_scene.mp4" file.
-3. Configure permissions if required.
+2. **Access Initial Issues:**
+   - Attempt to access the sample video directly through its S3 object URL. Encounter restrictions due to the initial bucket policy.
 
-## CloudFront Setup:
+3. **Set up CloudFront Distribution:**
+   - Create a CloudFront distribution specifically for the video sample.
+   - Configure essential options such as origin settings, caching behavior, and distribution settings.
 
-### Create a CloudFront Distribution:
-1. Navigate to the CloudFront service in the AWS Management Console.
-2. Click on "Create Distribution."
-3. Choose "Web" distribution.
-4. Set the S3 bucket as the origin.
-5. Configure other settings according to your requirements.
+4. **Update Bucket Policy:**
+   - Update the bucket policy to allow seamless media streaming via CloudFront. Ensure proper permissions are set.
 
-### Configure Basic Settings and Security Options:
-1. Set the appropriate alternate domain name (CNAME) and other settings.
-2. Choose your preferred security policies (HTTP to HTTPS redirect, etc.).
+5. **Test Setup:**
+   - Copy and paste the CloudFront distribution domain name and any required query parameters or object keys into a web browser.
+   - Verify that the video plays without encountering previous permission-related obstacles.
 
-### Modify Bucket Policy for CloudFront Access:
-1. Update the S3 bucket policy to grant access to the CloudFront distribution.
-   An example bucket policy is provided in the  other  file.
+6. **Finalize Configuration:**
+   - Adjust CloudFront settings as necessary for optimal performance and security.
+   - Ensure proper monitoring and logging are enabled for the CloudFront distribution.
 
-## Access the Video:
 
-1. Open Your Browser.
-2. Enter the CloudFront Distribution URL with Access Credentials, for example, https://your-cloudfront-domain.com/KGF2_scene.mp4.
-3. Enjoy watching the securely delivered sample video.
 
-For a secure video streaming experience using AWS S3 and CloudFront, follow the steps above and customize the configurations based on your specific requirements. 
+
+
